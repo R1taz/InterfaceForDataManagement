@@ -1,35 +1,27 @@
 'use client';
 
-import Table from '@/app/components/Table/Table';
+import FiltersPanel from '@/app/components/FiltersPanel';
+import Header from '@/app/components/Header';
+import Table from '@/app/components/Table';
+import { pagesColumns } from '@/app/config/columns/pagesColumns';
+import { pagesFilters } from '@/app/config/filters/pagesFilters';
 import { usePagesStore } from '@/app/stores/pagesStore';
-import { IColumn } from '@/app/stores/table';
-import { IPage } from '@/app/types/pages';
-import { formatActive } from '@/app/utils/formatActive';
-import { formatDate } from '@/app/utils/formatDate';
+import { applyFilters } from '@/app/utils/applyFilters';
+import { useState } from 'react';
 
 const Page = () => {
   const pages = usePagesStore(state => state.pages);
-
-  const columns: IColumn<IPage>[] = [
-    { key: 'id', label: 'ID', render: item => item.id },
-    { key: 'title', label: 'Title', render: item => item.title },
-    { key: 'active', label: 'Active', render: item => formatActive(item.active) },
-    {
-      key: 'publishedAt',
-      label: 'Published At',
-      render: item => formatDate(item.publishedAt),
-    },
-    {
-      key: 'updatedAt',
-      label: 'Updated At',
-      render: item => formatDate(item.updatedAt),
-    },
-  ];
+  const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
+  const filteredData = applyFilters(pages, pagesFilters, filterValues);
 
   return (
-    <main className="w-1/2 mx-auto my-auto">
-      <Table data={pages} columns={columns} />
-    </main>
+    <>
+      <Header />
+      <main className="w-1/2 mx-auto my-auto">
+        <FiltersPanel filters={pagesFilters} values={filterValues} onChange={setFilterValues} />
+        <Table data={filteredData} columns={pagesColumns} />
+      </main>
+    </>
   );
 };
 
