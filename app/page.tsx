@@ -1,27 +1,18 @@
-import Link from 'next/link';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 export default function Home() {
   return (
     <>
-      <header className="flex justify-between p-8">
-        <h1>Главная</h1>
-        <nav className="flex gap-8">
-          <Link href="/pages">Страницы</Link>
-          <Link href="/price-plans">Тарифные Планы</Link>
-          <Link href="/products">Продукты</Link>
-        </nav>
-      </header>
-
+      <Header />
       <main className="flex flex-col items-center py-10">
         <h1>Тестовое задание для компании ITACWT</h1>
-        <p>Крутое тестовое задание, которое я надеюсь засчитают и всё будет отлично</p>
+        <p>
+          Платформа для отображения массивов данных в виде таблицы, с фильтрацией и возможностью
+          редактирования
+        </p>
       </main>
-
-      <hr />
-
-      <footer className="p-5">
-        <h3>@R1tazzz</h3>
-      </footer>
+      <Footer />
     </>
   );
 }
