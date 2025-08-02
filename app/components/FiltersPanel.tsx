@@ -1,19 +1,18 @@
 'use client';
 
-import { FC } from 'react';
 import { FilterConfig } from '@/app/types/filters';
 import BooleanFilter from './BooleanFilter';
 import { DateRangeFilter } from './DateRangeFilter';
 import { SelectFilter } from './SelectFilter';
 import { TextOrNumberFilter } from './TextOrNumberFilter';
 
-interface Props {
-  filters: FilterConfig[];
+interface Props<T> {
+  filters: FilterConfig<T>[];
   values: Record<string, unknown>;
   onChange: (newValues: Record<string, unknown>) => void;
 }
 
-const FiltersPanel: FC<Props> = ({ filters, values, onChange }) => {
+const FiltersPanel = <T,>({ filters, values, onChange }: Props<T>) => {
   const handleChange = (key: string, value: unknown) => {
     onChange({ ...values, [key]: value });
   };

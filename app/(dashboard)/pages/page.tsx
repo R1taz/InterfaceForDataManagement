@@ -7,7 +7,7 @@ import { pagesColumns } from '@/app/config/columns/pagesColumns';
 import { pagesFilters } from '@/app/config/filters/pagesFilters';
 import { usePagesStore } from '@/app/stores/pagesStore';
 import { applyFilters } from '@/app/utils/applyFilters';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const Page = () => {
   const pages = usePagesStore(state => state.pages);
@@ -15,7 +15,10 @@ const Page = () => {
 
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
 
-  const filteredData = applyFilters(pages, pagesFilters, filterValues);
+  const filteredData = useMemo(
+    () => applyFilters(pages, pagesFilters, filterValues),
+    [pages, filterValues],
+  );
 
   return (
     <>

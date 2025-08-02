@@ -7,7 +7,7 @@ import { pricePlansColumns } from '@/app/config/columns/pricePlansColumns';
 import { pricePlansFilters } from '@/app/config/filters/pricePlansFilters';
 import { usePricePlansStore } from '@/app/stores/pricePlansStore';
 import { applyFilters } from '@/app/utils/applyFilters';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const Page = () => {
   const pricePlans = usePricePlansStore(state => state.pricePlans);
@@ -15,9 +15,10 @@ const Page = () => {
 
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
 
-  const filteredData = Array.isArray(pricePlans)
-    ? applyFilters(pricePlans, pricePlansFilters, filterValues)
-    : [];
+  const filteredData = useMemo(
+    () => applyFilters(pricePlans, pricePlansFilters, filterValues),
+    [pricePlans, filterValues],
+  );
 
   return (
     <>

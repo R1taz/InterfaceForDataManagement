@@ -1,9 +1,9 @@
 'use client';
 
 import { IColumn } from '@/app/stores/table';
-import { Button } from '@headlessui/react';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import EditModal from './EditModal';
+import TableRow from '@/app/components/TableRow';
 import { FilterConfig } from '../types/filters';
 import ModalWrapper from './ModalWrapper';
 
@@ -45,30 +45,13 @@ const Table = <T extends WithId>({ data, columns, filters, onUpdate }: Props<T>)
 
         <tbody>
           {data.map((item, rowIndex) => (
-            <tr key={rowIndex} className="text-white whitespace-nowrap">
-              {columns.map(col => (
-                <td
-                  key={col.key}
-                  className={`px-6 py-3 border-r border-[#444] bg-[#333333] ${
-                    rowIndex !== data.length - 1 ? 'border-b' : ''
-                  }`}
-                >
-                  {col.render(item)}
-                </td>
-              ))}
-              <td
-                className={`text-center px-6 py-3 border-[#444] bg-[#333333] ${
-                  rowIndex !== data.length - 1 ? 'border-b' : ''
-                }`}
-              >
-                <Button
-                  className="cursor-pointer transition hover:text-blue-500"
-                  onClick={() => setEditingRecord(item)}
-                >
-                  Редактировать
-                </Button>
-              </td>
-            </tr>
+            <TableRow
+              key={item.id}
+              item={item}
+              columns={columns}
+              isLastRow={rowIndex === data.length - 1}
+              onEdit={setEditingRecord}
+            />
           ))}
         </tbody>
       </table>
@@ -87,4 +70,6 @@ const Table = <T extends WithId>({ data, columns, filters, onUpdate }: Props<T>)
   );
 };
 
-export default Table;
+const TableWrapper = memo(Table) as <T extends WithId>(props: Props<T>) => React.JSX.Element;
+
+export default TableWrapper;

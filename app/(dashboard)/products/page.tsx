@@ -7,7 +7,7 @@ import { productsColumns } from '@/app/config/columns/productsColumns';
 import { productFilters } from '@/app/config/filters/productFilters';
 import { useProductsStore } from '@/app/stores/productsStore';
 import { applyFilters } from '@/app/utils/applyFilters';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const Page = () => {
   const products = useProductsStore(state => state.products);
@@ -15,9 +15,10 @@ const Page = () => {
 
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
 
-  const filteredData = Array.isArray(products)
-    ? applyFilters(products, productFilters, filterValues)
-    : [];
+  const filteredData = useMemo(
+    () => applyFilters(products, productFilters, filterValues),
+    [products, filterValues],
+  );
 
   return (
     <>
