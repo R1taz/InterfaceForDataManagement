@@ -3,9 +3,10 @@ import { IPricePlan } from '../types/price-plans';
 
 interface PricePlansState {
   pricePlans: IPricePlan[];
+  updateProduct: (updated: IPricePlan) => void;
 }
 
-export const usePricePlansStore = create<PricePlansState>(() => ({
+export const usePricePlansStore = create<PricePlansState>(set => ({
   pricePlans: [
     {
       id: 13334466,
@@ -78,4 +79,15 @@ export const usePricePlansStore = create<PricePlansState>(() => ({
       removedAt: '2021-09-09T11:21:13.0Z',
     },
   ],
+  updateProduct: updated =>
+    set(state => ({
+      pricePlans: state.pricePlans.map(pricePlan =>
+        pricePlan.id === updated.id
+          ? {
+              ...pricePlan,
+              ...updated,
+            }
+          : pricePlan,
+      ),
+    })),
 }));

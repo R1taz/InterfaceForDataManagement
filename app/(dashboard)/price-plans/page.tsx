@@ -1,6 +1,6 @@
 'use client';
 
-import FiltersPanel from '@/app/components/FiltersPanel';
+import FilterToggle from '@/app/components/FilterToggle';
 import Header from '@/app/components/Header';
 import Table from '@/app/components/Table';
 import { pricePlansColumns } from '@/app/config/columns/pricePlansColumns';
@@ -11,19 +11,29 @@ import { useState } from 'react';
 
 const Page = () => {
   const pricePlans = usePricePlansStore(state => state.pricePlans);
+  const updateProduct = usePricePlansStore(state => state.updateProduct);
+
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
-  const filteredData = applyFilters(pricePlans, pricePlansFilters, filterValues);
+
+  const filteredData = Array.isArray(pricePlans)
+    ? applyFilters(pricePlans, pricePlansFilters, filterValues)
+    : [];
 
   return (
     <>
       <Header />
-      <main className="w-1/2 mx-auto my-auto">
-        <FiltersPanel
+      <main className="w-[75%] mx-auto my-auto">
+        <FilterToggle
           filters={pricePlansFilters}
           values={filterValues}
           onChange={setFilterValues}
         />
-        <Table data={filteredData} columns={pricePlansColumns} />
+        <Table
+          data={filteredData}
+          onUpdate={updateProduct}
+          filters={pricePlansFilters}
+          columns={pricePlansColumns}
+        />
       </main>
     </>
   );

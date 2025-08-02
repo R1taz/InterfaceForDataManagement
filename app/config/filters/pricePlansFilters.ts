@@ -1,8 +1,8 @@
 import { FilterConfig } from '@/app/types/filters';
+import { IPricePlan } from '@/app/types/price-plans';
 
-export const pricePlansFilters: FilterConfig[] = [
-  { key: 'description', label: 'Description', type: 'text' },
-  { key: 'active', label: 'Active', type: 'boolean' },
-  { key: 'createdAt', label: 'Created At', type: 'date-range' },
-  { key: 'removedAt', label: 'Removed At', type: 'date-range' },
+export const pricePlansFilters: FilterConfig<IPricePlan>[] = [
+  { key: 'description', label: 'Описание', type: 'text', editable: true },
+  { key: 'active', label: 'Статус активности', type: 'boolean', editable: true },
+  { key: 'createdAt', label: 'Дата создания', type: 'date-range', editable: false },
 ];

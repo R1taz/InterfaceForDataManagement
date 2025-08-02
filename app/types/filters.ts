@@ -1,35 +1,37 @@
 export type FilterType = 'text' | 'number' | 'boolean' | 'date-range' | 'select';
 
-export interface BaseFilter {
+export interface BaseFilter<T = unknown> {
   key: string;
   label: string;
   type: FilterType;
+  options?: string[];
+  editable?: boolean | ((record: T) => boolean);
 }
 
-export interface TextFilter extends BaseFilter {
+export interface TextFilter<T> extends BaseFilter<T> {
   type: 'text';
 }
 
-export interface NumberFilter extends BaseFilter {
+export interface NumberFilter<T> extends BaseFilter<T> {
   type: 'number';
 }
 
-export interface BooleanFilter extends BaseFilter {
+export interface BooleanFilter<T> extends BaseFilter<T> {
   type: 'boolean';
 }
 
-export interface DateRangeFilter extends BaseFilter {
+export interface DateRangeFilter<T> extends BaseFilter<T> {
   type: 'date-range';
 }
 
-export interface SelectFilter extends BaseFilter {
+export interface SelectFilter<T> extends BaseFilter<T> {
   type: 'select';
   options: string[];
 }
 
-export type FilterConfig =
-  | TextFilter
-  | NumberFilter
-  | BooleanFilter
-  | DateRangeFilter
-  | SelectFilter;
+export type FilterConfig<T> =
+  | TextFilter<T>
+  | NumberFilter<T>
+  | BooleanFilter<T>
+  | DateRangeFilter<T>
+  | SelectFilter<T>;

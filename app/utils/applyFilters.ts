@@ -3,7 +3,7 @@ import { getValueByPath } from './getValueByPath';
 
 export function applyFilters<T>(
   data: T[],
-  filters: FilterConfig[],
+  filters: FilterConfig<T>[],
   values: Record<string, unknown>,
 ): T[] {
   return data.filter(item => {
@@ -37,7 +37,7 @@ export function applyFilters<T>(
           const [from, to] = filterValue as [string?, string?];
           const date = new Date(String(value)).getTime();
           const fromDate = from ? new Date(from).getTime() : null;
-          const toDate = to ? new Date(to).getTime() : null;
+          const toDate = to ? new Date(new Date(to).getTime() + 86400000).getTime() : null;
           return (!fromDate || date >= fromDate) && (!toDate || date <= toDate);
         }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import FiltersPanel from '@/app/components/FiltersPanel';
+import FilterToggle from '@/app/components/FilterToggle';
 import Header from '@/app/components/Header';
 import Table from '@/app/components/Table';
 import { productsColumns } from '@/app/config/columns/productsColumns';
@@ -11,15 +11,25 @@ import { useState } from 'react';
 
 const Page = () => {
   const products = useProductsStore(state => state.products);
+  const updateProduct = useProductsStore(state => state.updateProduct);
+
   const [filterValues, setFilterValues] = useState<Record<string, unknown>>({});
-  const filteredData = applyFilters(products, productFilters, filterValues);
+
+  const filteredData = Array.isArray(products)
+    ? applyFilters(products, productFilters, filterValues)
+    : [];
 
   return (
     <>
       <Header />
-      <main className="w-1/2 mx-auto my-auto">
-        <FiltersPanel filters={productFilters} values={filterValues} onChange={setFilterValues} />
-        <Table data={filteredData} columns={productsColumns} />
+      <main className="w-[75%] mx-auto my-auto">
+        <FilterToggle filters={productFilters} values={filterValues} onChange={setFilterValues} />
+        <Table
+          data={filteredData}
+          onUpdate={updateProduct}
+          filters={productFilters}
+          columns={productsColumns}
+        />
       </main>
     </>
   );

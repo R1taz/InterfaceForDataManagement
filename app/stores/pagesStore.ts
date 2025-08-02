@@ -3,9 +3,10 @@ import { IPage } from '../types/pages';
 
 interface PagesState {
   pages: IPage[];
+  updateProduct: (updated: IPage) => void;
 }
 
-export const usePagesStore = create<PagesState>(() => ({
+export const usePagesStore = create<PagesState>(set => ({
   pages: [
     {
       id: 23634610,
@@ -78,4 +79,15 @@ export const usePagesStore = create<PagesState>(() => ({
       publishedAt: '1998-12-12T14:02:25.0Z',
     },
   ],
+  updateProduct: updated =>
+    set(state => ({
+      pages: state.pages.map(page =>
+        page.id === updated.id
+          ? {
+              ...page,
+              ...updated,
+            }
+          : page,
+      ),
+    })),
 }));
