@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import ModalWrapper from './ModalWrapper';
 import FiltersPanel from './FiltersPanel';
 import { FilterConfig } from '../types/filters';
@@ -30,4 +30,6 @@ const FilterToggle = <T,>({ filters, values, onChange }: Props<T>) => {
   );
 };
 
-export default FilterToggle;
+const FilterToggleWrapper = memo(FilterToggle) as <T>(props: Props<T>) => React.JSX.Element;
+
+export default FilterToggleWrapper;
