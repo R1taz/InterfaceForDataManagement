@@ -21,18 +21,39 @@ const BooleanFilter: FC<BooleanFilterProps> = ({ label, value, onChange }) => {
       <label className="block mb-1">{label}</label>
       <Listbox value={listboxValue} onChange={handleChange}>
         <div className="relative">
-          <ListboxButton className="border p-2 w-full rounded text-left">
-            {value === undefined ? '--' : value ? 'Yes' : 'No'}
+          <ListboxButton className="bg-[#1e1e1e] border border-[#444] text-white px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-left">
+            {value === undefined ? '--' : value ? 'Активен' : 'Не активен'}
           </ListboxButton>
-          <ListboxOptions className="absolute z-10 bg-white border mt-1 w-full rounded shadow">
-            <ListboxOption value="unset" className="p-2 hover:bg-gray-100 cursor-pointer">
+          <ListboxOptions className="absolute z-10 bg-[#1e1e1e] border border-[#444] mt-1 w-full rounded-md shadow-lg max-h-60 overflow-auto">
+            <ListboxOption
+              value="unset"
+              className={({ active }) =>
+                `cursor-pointer select-none p-2 rounded ${
+                  active ? 'bg-blue-600 text-white' : 'text-white'
+                }`
+              }
+            >
               --
             </ListboxOption>
-            <ListboxOption value="true" className="p-2 hover:bg-gray-100 cursor-pointer">
-              Yes
+            <ListboxOption
+              value="true"
+              className={({ active }) =>
+                `cursor-pointer select-none p-2 rounded ${
+                  active ? 'bg-blue-600 text-white' : 'text-white'
+                }`
+              }
+            >
+              Активен
             </ListboxOption>
-            <ListboxOption value="false" className="p-2 hover:bg-gray-100 cursor-pointer">
-              No
+            <ListboxOption
+              value="false"
+              className={({ active }) =>
+                `cursor-pointer select-none p-2 rounded ${
+                  active ? 'bg-blue-600 text-white' : 'text-white'
+                }`
+              }
+            >
+              Не активен
             </ListboxOption>
           </ListboxOptions>
         </div>
