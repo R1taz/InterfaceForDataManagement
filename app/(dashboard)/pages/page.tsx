@@ -20,7 +20,7 @@ const Page = () => {
   return (
     <>
       <Header />
-      <main className="w-[75%] mx-auto my-auto">
+      <main className="w-[85%] mx-auto my-auto">
         <FilterToggle filters={pagesFilters} values={filterValues} onChange={setFilterValues} />
         <Table
           data={filteredData}

@@ -22,5 +22,40 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'WixMadeforDisplay', Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: 'WixMadeforDisplay';
+  src: url('./fonts/WixMadeforDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WixMadeforDisplay';
+  src: url('./fonts/WixMadeforDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WixMadeforDisplay';
+  src: url('./fonts/WixMadeforDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WixMadeforDisplay';
+  src: url('./fonts/WixMadeforDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WixMadeforDisplay';
+  src: url('./fonts/WixMadeforDisplay-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
 }
