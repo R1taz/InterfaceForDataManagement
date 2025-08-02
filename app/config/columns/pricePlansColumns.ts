@@ -5,11 +5,11 @@ import { formatDate } from '@/app/utils/formatDate';
 
 export const pricePlansColumns: IColumn<IPricePlan>[] = [
   { key: 'id', label: 'ID', render: item => item.id },
-  { key: 'description', label: 'Name', render: item => item.description },
-  { key: 'active', label: 'Active', render: item => formatActive(item.active) },
+  { key: 'description', label: 'Описание', render: item => item.description },
+  { key: 'active', label: 'Статус активности', render: item => formatActive(item.active) },
   {
     key: 'createdAt',
-    label: 'Created At',
+    label: 'Дата создания',
     render: item => formatDate(item.createdAt),
   },
 ];

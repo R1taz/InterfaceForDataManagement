@@ -5,13 +5,13 @@ import { formatDate } from '@/app/utils/formatDate';
 
 export const productsColumns: IColumn<IProduct>[] = [
   { key: 'id', label: 'ID', render: item => item.id },
-  { key: 'name', label: 'Name', render: item => item.name },
-  { key: 'size', label: 'Size', render: item => item.options.size },
-  { key: 'amount', label: 'Amount', render: item => item.options.amount },
-  { key: 'active', label: 'Active', render: item => formatActive(item.active) },
+  { key: 'name', label: 'Название', render: item => item.name },
+  { key: 'size', label: 'Размер', render: item => item.options.size },
+  { key: 'amount', label: 'Цена', render: item => item.options.amount },
+  { key: 'active', label: 'Статус активности', render: item => formatActive(item.active) },
   {
     key: 'createdAt',
-    label: 'Created At',
+    label: 'Дата создания',
     render: item => formatDate(item.createdAt),
   },
 ];
