@@ -3,9 +3,10 @@ import { IProduct } from '../types/products';
 
 interface ProductsState {
   products: IProduct[];
+  updateProduct: (updated: IProduct) => void;
 }
 
-export const useProductsStore = create<ProductsState>(() => ({
+export const useProductsStore = create<ProductsState>(set => ({
   products: [
     {
       id: 14381328,
@@ -108,4 +109,19 @@ export const useProductsStore = create<ProductsState>(() => ({
       createdAt: '2012-09-24T01:42:32.0Z',
     },
   ],
+  updateProduct: updated =>
+    set(state => ({
+      products: state.products.map(product =>
+        product.id === updated.id
+          ? {
+              ...product,
+              ...updated,
+              options: {
+                ...product.options,
+                ...updated.options,
+              },
+            }
+          : product,
+      ),
+    })),
 }));
